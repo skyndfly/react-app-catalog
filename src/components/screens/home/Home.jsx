@@ -1,23 +1,20 @@
-import styles from './Home.module.css'
 import {cars} from './cars.data.js'
+import CarItem from "./car-item/CarItem.jsx";
+import CreateCarForm from "./create-car-form/CreateCarForm.jsx";
 function Home() {
+
     return (
         <div>
             <h1>Каталог машин</h1>
+            <div className='add'>
+                    <CreateCarForm />
+            </div>
             <div className='catalog'>
-                {cars.map(car => (
-                    <div key={car.id} className={styles.item}>
-                        <div className={styles.image} style={{backgroundImage: `url(${car.image})`}}></div>
-                        <div className={styles.info}>
-                            <h2>{car.name}</h2>
-                            <p>{new Intl.NumberFormat('en-US',{
-                                style: 'currency',
-                                currency: "USD",
-                            }).format(car.price)}</p>
-                            <button>Подробнее</button>
-                        </div>
-                    </div>
-                ))}
+                {cars.length ? cars.map(car => (
+                        <CarItem key={car.id} car={car}/>
+                    ))
+                    : <p>Машин нет</p>
+                }
 
             </div>
         </div>
